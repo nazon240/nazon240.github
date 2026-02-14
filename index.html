@@ -1,229 +1,263 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi San Valentín para Shinae</title>
+    <title>Mi Amor para Shinae ❤️</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: 'Arial', sans-serif;
-            height: 100vh;
             overflow: hidden;
-            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            height: 100vh;
+        }
+
+        /* Fondo morado inicial */
+        .fondo-morado {
+            background: linear-gradient(135deg, #8b5fcf 0%, #6b3fa0 50%, #4a148c 100%);
+            width: 100vw;
+            height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             position: relative;
         }
-        #corazon-inicial {
-            font-size: 10rem;
-            color: #e74c3c;
+
+        /* Corazón inicial con brillos */
+        .corazon-inicial {
+            font-size: 15rem;
+            color: #ff1744;
             cursor: pointer;
-            text-shadow: 0 0 20px #ff1744, 0 0 40px #ff1744;
-            animation: brillo 2s infinite alternate, float 3s infinite ease-in-out;
-            transition: opacity 0.5s;
+            animation: brillo 2s ease-in-out infinite alternate, flotar 3s ease-in-out infinite;
+            text-shadow: 0 0 20px #ff1744, 0 0 40px #ff1744, 0 0 60px #ff1744;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
+
+        .corazon-inicial:hover {
+            transform: scale(1.1);
+            animation: none;
+        }
+
         @keyframes brillo {
-            0% { text-shadow: 0 0 20px #ff1744, 0 0 40px #ff1744; }
-            100% { text-shadow: 0 0 30px #ff69b4, 0 0 60px #ff69b4; }
+            0% { text-shadow: 0 0 20px #ff1744, 0 0 40px #ff1744, 0 0 60px #ff1744; }
+            100% { text-shadow: 0 0 30px #ff1744, 0 0 60px #ff1744, 0 0 100px #ff1744; }
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
+
+        @keyframes flotar {
+            0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
         }
-        #contenedor-pregunta {
+
+        /* Contenido después del corazón */
+        .contenido-botones {
             display: none;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            gap: 1.5rem;
-            width: 90%;
-            max-width: 500px;
+            animation: aparecer-suave 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
-        #pregunta-texto {
+
+        .texto-pregunta {
             color: black;
-            font-size: 1.5rem;
-            margin-bottom: 0;
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: texto-entrada 1s ease-out 0.5s both;
         }
-        #gif-personal {
+
+        /* Área para imagen personalizada */
+        .area-imagen {
             width: 200px;
             height: 200px;
-            border-radius: 50%;
-            object-fit: cover;
+            margin-bottom: 1rem;
+            border-radius: 20px;
+            overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border: 4px solid rgba(255,255,255,0.3);
-            animation: girar-suave 4s linear infinite;
         }
-        #gif-personal:hover {
-            animation-play-state: paused;
-        }
-        @keyframes girar-suave {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        #botones {
+
+        /* Botones */
+        .botones-container {
             display: flex;
-            justify-content: center;
-            align-items: center;
             gap: 4rem;
-            flex-wrap: wrap;
-            position: relative;
+            margin-top: 1rem;
         }
+
         .btn {
-            padding: 1rem 2rem;
-            font-size: 1.2rem;
+            padding: 1.5rem 3rem;
+            font-size: 1.5rem;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
-        #btn-no {
-            background: #95a5a6;
+
+        .btn-no {
+            background: #9e9e9e;
             color: black;
         }
-        #btn-si {
-            background: linear-gradient(135deg, #ff69b4, #ff1493);
-            color: #8e44ad;
-            font-weight: bold;
+
+        .btn-si {
+            background: linear-gradient(135deg, #ff77a6 0%, #ff4d88 100%);
+            color: #7b1fa2;
         }
-        #btn-no.pequeño {
-            transform: scale(0.7);
-            transition: all 0.3s ease;
+
+        .btn:hover {
+            transform: translateY(-5px);
         }
-        #escena-final {
+
+        .btn-no:active {
+            animation: encogerse 0.3s ease-out forwards;
+        }
+
+        /* Pantalla final con corazón latiendo */
+        .pantalla-final {
             display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #ff9a9e, #fecfef);
-            justify-content: center;
-            align-items: center;
-            z-index: 10;
-        }
-        #contenedor-corazon-final {
+            width: 100vw;
+            height: 100vh;
             position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            overflow: hidden;
         }
-        #corazon-final {
-            font-size: 12rem;
-            color: #e74c3c;
+
+        .corazon-fondo {
             position: absolute;
-            animation: latido 1.5s infinite;
-            z-index: 2;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20rem;
+            color: pink (255, 255, 255, 0.1);
+            animation: latir 1.5s ease-in-out infinite;
+            z-index: 1;
         }
-        @keyframes latido {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-        #texto-amor {
-            position: relative;
-            z-index: 3;
-            max-width: 90%;
+
+        .mensaje-amor {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: black;
+            font-size: 1.4rem;
             text-align: center;
-            color: #333;
-            font-size: 1.2rem;
-            line-height: 1.5;
-            animation: fadeInUp 1s ease-out;
-            padding: 3rem 2rem;
-            background: rgba(255,255,255,0.9);
-            border-radius: 25px;
-            backdrop-filter: blur(15px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            max-width: 90%;
+            line-height: 1.6;
+            z-index: 2;
+            animation: texto-corazon 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+            opacity: 0;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
         }
-        @keyframes fadeInUp {
-            0% { opacity: 0; transform: translateY(30px); }
-            100% { opacity: 1; transform: translateY(0); }
+
+        @keyframes latir {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            14% { transform: translate(-50%, -50%) scale(1.3); }
+            28% { transform: translate(-50%, -50%) scale(1.1); }
+            42% { transform: translate(-50%, -50%) scale(1.25); }
+            70% { transform: translate(-50%, -50%) scale(1.05); }
         }
+
+        @keyframes aparecer-suave {
+            from { opacity: 0; transform: scale(0.8) rotate(-5deg); }
+            to { opacity: 1; transform: scale(1) rotate(0deg); }
+        }
+
+        @keyframes texto-entrada {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes texto-corazon {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+
+        @keyframes encogerse {
+            0% { transform: scale(1); }
+            100% { transform: scale(0); opacity: 0; pointer-events: none; }
+        }
+
         @media (max-width: 768px) {
-            #corazon-inicial { font-size: 6rem; }
-            #gif-personal { width: 150px; height: 150px; }
-            #pregunta-texto { font-size: 1.2rem; }
-            #botones { gap: 2rem; }
-            .btn { padding: 0.8rem 1.5rem; font-size: 1rem; }
-            #corazon-final { font-size: 8rem; }
-            #texto-amor { font-size: 1rem; padding: 2rem 1rem; }
+            .corazon-inicial { font-size: 10rem; }
+            .texto-pregunta { font-size: 1.8rem; }
+            .botones-container { gap: 2rem; flex-direction: column; align-items: center; }
+            .btn { padding: 1rem 2rem; font-size: 1.2rem; }
+            .mensaje-amor { font-size: 1.1rem; }
         }
     </style>
 </head>
 <body>
-    <div id="corazon-inicial">💖</div>
-
-    <div id="contenedor-pregunta">
-        <!-- GIF por enlace directo -->
-        <img id="gif-personal" src="https://64.media.tumblr.com/87c785963e7ce514cde9e27c6d5ead97/3d78df2e5f5ef54c-7e/s400x600/0b7924fb2d62821c9991908fd433dc5630226410.gifv" alt="Corazón romántico">
+    <!-- Pantalla inicial -->
+    <div class="fondo-morado" id="pantallaInicial">
+        <div class="corazon-inicial" id="corazonInicial">💖</div>
         
-        <div id="pregunta-texto">¿Quieres ser mi San Valentín?</div>
-        <div id="botones">
-            <button id="btn-no" class="btn">No</button>
-            <button id="btn-si" class="btn">Sí</button>
-        </div>
-    </div>
-
-    <div id="escena-final">
-        <div id="contenedor-corazon-final">
-            <div id="corazon-final">💖</div>
-            <div id="texto-amor">
-                Te amo mucho Shinae Sheylyn Casas Villalba. Espero que nos podamos ver el domingo mi amor. Tengo una sorpresa para ti mi vida 😍. Se que tal vez hoy 14 no podremos vernos pero el domingo si. 
-                No te quiero perder mi amor, quiero mejorar por nosotros te amooooo mucho ❤️.
+        <div class="contenido-botones" id="contenidoBotones">
+            <!-- Aquí puedes poner tu imagen o GIF personalizado -->
+            <div class="area-imagen">
+                <!-- Ejemplo: <img src="tu-imagen-o-gif.gif" style="width:100%;height:100%;"> -->
+            </div>
+            <div class="texto-pregunta">¿Quieres ser mi San Valentín?</div>
+            <div class="botones-container">
+                <button class="btn btn-no" id="btnNo">No</button>
+                <button class="btn btn-si" id="btnSi">Sí</button>
             </div>
         </div>
     </div>
 
+    <!-- Pantalla final -->
+    <div class="pantalla-final" id="pantallaFinal">
+        <div class="corazon-fondo">💖</div>
+        <div class="mensaje-amor">
+            Te amo mucho Shinae Sheylyn Casas Villalba. 
+            Espero que nos podamos ver el domingo mi amor. 
+            Tengo una sorpresa para ti mi vida 😍. 
+            Sé que tal vez hoy 14 no podremos vernos pero el domingo sí. 
+            No te quiero perder mi amor, quiero mejorar por nosotros 
+            te amoooo mucho ❤️.
+        </div>
+    </div>
+
     <script>
-        const corazonInicial = document.getElementById('corazon-inicial');
-        const contenedorPregunta = document.getElementById('contenedor-pregunta');
-        const btnNo = document.getElementById('btn-no');
-        const btnSi = document.getElementById('btn-si');
-        const escenaFinal = document.getElementById('escena-final');
+        const corazonInicial = document.getElementById('corazonInicial');
+        const contenidoBotones = document.getElementById('contenidoBotones');
+        const btnNo = document.getElementById('btnNo');
+        const btnSi = document.getElementById('btnSi');
+        const pantallaInicial = document.getElementById('pantallaInicial');
+        const pantallaFinal = document.getElementById('pantallaFinal');
 
-        let noPresionado = 0;
-        const posicionesNo = [
-            { top: '20%', left: '10%' },
-            { top: '10%', right: '10%' },
-            { bottom: '20%', left: '20%' },
-            { top: '30%', right: '20%' }
-        ];
+        let clicksNo = 0;
+        const maxClicksNo = 5;
 
+        // Click en corazón inicial
         corazonInicial.addEventListener('click', () => {
-            corazonInicial.style.opacity = '0';
+            corazonInicial.style.display = 'none';
             setTimeout(() => {
-                contenedorPregunta.style.display = 'flex';
+                contenidoBotones.style.display = 'flex';
             }, 500);
         });
 
+        // Click en botón No
         btnNo.addEventListener('click', () => {
-            noPresionado++;
-            btnNo.classList.add('pequeño');
+            clicksNo++;
+            const escala = 1 - (clicksNo * 0.15);
             
-            if (noPresionado < posicionesNo.length) {
-                const pos = posicionesNo[noPresionado];
-                Object.assign(btnNo.style, { 
-                    position: 'absolute', 
-                    zIndex: '1000',
-                    ...pos 
-                });
-            } else {
+            if (clicksNo >= maxClicksNo) {
                 btnNo.style.display = 'none';
+            } else {
+                btnNo.style.transform = `scale(${escala})`;
+                btnNo.style.fontSize = `${1.5 - (clicksNo * 0.1)}rem`;
             }
         });
 
+        // Click en botón Sí
         btnSi.addEventListener('click', () => {
-            contenedorPregunta.style.opacity = '0';
+            pantallaInicial.style.display = 'none';
             setTimeout(() => {
-                escenaFinal.style.display = 'flex';
+                pantallaFinal.style.display = 'block';
             }, 500);
         });
     </script>
