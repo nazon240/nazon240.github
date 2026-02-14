@@ -1,19 +1,265 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Mi Amor para Shinae ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* Fondo morado inicial */
+        .fondo-morado {
+            background: linear-gradient(135deg, #8b5fcf 0%, #6b3fa0 50%, #4a148c 100%);
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Corazón inicial con brillos */
+        .corazon-inicial {
+            font-size: 15rem;
+            color: #ff1744;
+            cursor: pointer;
+            animation: brillo 2s ease-in-out infinite alternate, flotar 3s ease-in-out infinite;
+            text-shadow: 0 0 20px #ff1744, 0 0 40px #ff1744, 0 0 60px #ff1744;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .corazon-inicial:hover {
+            transform: scale(1.1);
+            animation: none;
+        }
+
+        @keyframes brillo {
+            0% { text-shadow: 0 0 20px #ff1744, 0 0 40px #ff1744, 0 0 60px #ff1744; }
+            100% { text-shadow: 0 0 30px #ff1744, 0 0 60px #ff1744, 0 0 100px #ff1744; }
+        }
+
+        @keyframes flotar {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Contenido después del corazón */
+        .contenido-botones {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            animation: aparecer-suave 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .texto-pregunta {
+            color: black;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: texto-entrada 1s ease-out 0.5s both;
+        }
+
+        /* Área para imagen personalizada */
+        .area-imagen {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 1rem;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Botones */
+        .botones-container {
+            display: flex;
+            gap: 4rem;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            padding: 1.5rem 3rem;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .btn-no {
+            background: #9e9e9e;
+            color: black;
+        }
+
+        .btn-si {
+            background: linear-gradient(135deg, #ff77a6 0%, #ff4d88 100%);
+            color: #7b1fa2;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+        }
+
+        .btn-no:active {
+            animation: encogerse 0.3s ease-out forwards;
+        }
+
+        /* Pantalla final con corazón latiendo */
+        .pantalla-final {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .corazon-fondo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20rem;
+            color: pink (255, 255, 255, 0.1);
+            animation: latir 1.5s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .mensaje-amor {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: black;
+            font-size: 1.4rem;
+            text-align: center;
+            max-width: 90%;
+            line-height: 1.6;
+            z-index: 2;
+            animation: texto-corazon 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+            opacity: 0;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+
+        @keyframes latir {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            14% { transform: translate(-50%, -50%) scale(1.3); }
+            28% { transform: translate(-50%, -50%) scale(1.1); }
+            42% { transform: translate(-50%, -50%) scale(1.25); }
+            70% { transform: translate(-50%, -50%) scale(1.05); }
+        }
+
+        @keyframes aparecer-suave {
+            from { opacity: 0; transform: scale(0.8) rotate(-5deg); }
+            to { opacity: 1; transform: scale(1) rotate(0deg); }
+        }
+
+        @keyframes texto-entrada {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes texto-corazon {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+
+        @keyframes encogerse {
+            0% { transform: scale(1); }
+            100% { transform: scale(0); opacity: 0; pointer-events: none; }
+        }
+
+        @media (max-width: 768px) {
+            .corazon-inicial { font-size: 10rem; }
+            .texto-pregunta { font-size: 1.8rem; }
+            .botones-container { gap: 2rem; flex-direction: column; align-items: center; }
+            .btn { padding: 1rem 2rem; font-size: 1.2rem; }
+            .mensaje-amor { font-size: 1.1rem; }
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello, World!</h1>
-    <p>This is a sample paragraph.</p>
-    
-    <!-- Ejemplo: <img src="tu-imagen-o-gif.gif" style="width:100%;height:100%;"> -->
-    <img src="https://64.media.tumblr.com/87c785963e7ce514cde9e27c6d5ead97/3d78df2e5f5ef54c-7e/s400x600/0b7924fb2d62821c9991908fd433dc5630226410.gifv" style="width:100%;height:100%;">
+    <!-- Pantalla inicial -->
+    <div class="fondo-morado" id="pantallaInicial">
+        <div class="corazon-inicial" id="corazonInicial">💖</div>
+        
+        <div class="contenido-botones" id="contenidoBotones">
+            <!-- Aquí puedes poner tu imagen o GIF personalizado -->
+            <div class="area-imagen">
+                <!-- Ejemplo: <img src="tu-imagen-o-gif.gif" style="width:100%;height:100%;"> -->
+            </div>
+            <div class="texto-pregunta">¿Quieres ser mi San Valentín?</div>
+            <div class="botones-container">
+                <button class="btn btn-no" id="btnNo">No</button>
+                <button class="btn btn-si" id="btnSi">Sí</button>
+            </div>
+        </div>
+    </div>
 
-    <footer>
-        <p>Footer Content</p>
-    </footer>
+    <!-- Pantalla final -->
+    <div class="pantalla-final" id="pantallaFinal">
+        <div class="corazon-fondo">💖</div>
+        <div class="mensaje-amor">
+            Te amo mucho Shinae Sheylyn Casas Villalba. 
+            Espero que nos podamos ver el domingo mi amor. 
+            Tengo una sorpresa para ti mi vida 😍. 
+            Sé que tal vez hoy 14 no podremos vernos pero el domingo sí. 
+            No te quiero perder mi amor, quiero mejorar por nosotros 
+            te amoooo mucho ❤️.
+        </div>
+    </div>
+
+    <script>
+        const corazonInicial = document.getElementById('corazonInicial');
+        const contenidoBotones = document.getElementById('contenidoBotones');
+        const btnNo = document.getElementById('btnNo');
+        const btnSi = document.getElementById('btnSi');
+        const pantallaInicial = document.getElementById('pantallaInicial');
+        const pantallaFinal = document.getElementById('pantallaFinal');
+
+        let clicksNo = 0;
+        const maxClicksNo = 5;
+
+        // Click en corazón inicial
+        corazonInicial.addEventListener('click', () => {
+            corazonInicial.style.display = 'none';
+            setTimeout(() => {
+                contenidoBotones.style.display = 'flex';
+            }, 500);
+        });
+
+        // Click en botón No
+        btnNo.addEventListener('click', () => {
+            clicksNo++;
+            const escala = 1 - (clicksNo * 0.15);
+            
+            if (clicksNo >= maxClicksNo) {
+                btnNo.style.display = 'none';
+            } else {
+                btnNo.style.transform = `scale(${escala})`;
+                btnNo.style.fontSize = `${1.5 - (clicksNo * 0.1)}rem`;
+            }
+        });
+
+        // Click en botón Sí
+        btnSi.addEventListener('click', () => {
+            pantallaInicial.style.display = 'none';
+            setTimeout(() => {
+                pantallaFinal.style.display = 'block';
+            }, 500);
+        });
+    </script>
 </body>
 </html>
