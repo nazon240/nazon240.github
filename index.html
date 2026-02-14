@@ -1,13 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="Ejemplo de página con animaciones">
+    <title>Página de Amor</title>
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; }
+        .fondo-morado { background-color: #6a0dad; padding: 20px; text-align: center; }
+        .corazon-inicial { animation: bounce 2s infinite; }
+        .contenido-botones { margin-top: 20px; }
+        .area-imagen img { max-width: 100%; height: auto; }
+        .text-pregunta { color: white; font-size: 1.5em; }
+        .botones-container { margin-top: 10px; }
+        .pantalla-final { display: none; }
+        .corazon-fondo { background-color: rgba(255, 0, 0, 0.5); } 
+        .mensaje-amor { color: white; font-size: 2em; }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-30px); } 60% { transform: translateY(-15px); } }
+    </style>
 </head>
 <body>
-    <div id="area-imagen">
-        <img src="https://64.media.tumblr.com/87c785963e7ce514cde9e27c6d5ead97/3d78df2e5f5ef54c-7e/s400x600/0b7924fb2d62821c9991908fd433dc5630226410.gifv" alt="GIF Image">
+    <div class="fondo-morado">
+        <div class="corazon-inicial">❤️</div>
+        <div class="contenido-botones">
+            <div class="area-imagen"><img src="https://64.media.tumblr.com/87c785963e7ce514cde9e27c6d5ead97/3d78df2e5f5ef54c-7e/s400x600/0b7924fb2d62821c9991908fd433dc5630226410.gifv" alt="GIF de Corazón"></div>
+            <div class="texto-pregunta">¿Te gusta este diseño?</div>
+            <div class="botones-container">
+                <button id="si-button">Sí</button>
+                <button id="no-button">No</button>
+            </div>
+        </div>
     </div>
+    <div class="pantalla-final">
+        <div class="corazon-fondo">❤️</div>
+        <div class="mensaje-amor">¡Gracias por tu respuesta!</div>
+    </div>
+    <script>
+        const siButton = document.getElementById('si-button');
+        const noButton = document.getElementById('no-button');
+        const pantallaFinal = document.querySelector('.pantalla-final');
+        const contenidoBotones = document.querySelector('.contenido-botones');
+
+        siButton.addEventListener('click', () => {
+            contenidoBotones.style.display = 'none';
+            pantallaFinal.style.display = 'block';
+        });
+
+        noButton.addEventListener('click', () => {
+            alerta('¡Intenta de nuevo!');
+        });
+    </script>
 </body>
 </html>
