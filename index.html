@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+             <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -36,24 +37,31 @@
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-20px); }
         }
-        #pregunta {
+        #contenedor-pregunta {
             display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
+            gap: 1.5rem;
+            width: 90%;
+            max-width: 500px;
+        }
+        #pregunta-texto {
             color: black;
             font-size: 1.5rem;
-            margin-bottom: 2rem;
-            position: relative;
+            margin-bottom: 0;
         }
         #gif-personal {
             width: 200px;
             height: 200px;
-            margin: 0 auto 1rem;
             border-radius: 50%;
             background: url('https://media.giphy.com/media/Ju7l5y9osyymQ/giphy.gif') center/cover; /* Reemplaza con tu GIF */
         }
         #botones {
-            display: none;
+            display: flex;
             justify-content: center;
+            align-items: center;
             gap: 4rem;
             flex-wrap: wrap;
         }
@@ -64,11 +72,11 @@
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
         }
         #btn-no {
             background: #95a5a6;
             color: black;
-            position: relative;
         }
         #btn-si {
             background: linear-gradient(135deg, #ff69b4, #ff1493);
@@ -90,25 +98,36 @@
             align-items: center;
             z-index: 10;
         }
-        #corazon-final {
-            font-size: 8rem;
-            color: #e74c3c;
+        #contenedor-corazon-final {
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #corazon-final {
+            font-size: 12rem; /* Más grande */
+            color: #e74c3c;
+            position: absolute;
             animation: latido 1.5s infinite;
+            z-index: 2;
         }
         @keyframes latido {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.2); }
         }
         #texto-amor {
-            position: absolute;
+            position: relative;
+            z-index: 3;
             max-width: 90%;
             text-align: center;
             color: #333;
             font-size: 1.2rem;
             line-height: 1.5;
             animation: fadeInUp 1s ease-out;
-            padding: 2rem;
+            padding: 3rem 2rem;
+            background: rgba(255,255,255,0.8);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
         }
         @keyframes fadeInUp {
             0% { opacity: 0; transform: translateY(30px); }
@@ -117,20 +136,20 @@
         @media (max-width: 768px) {
             #corazon-inicial { font-size: 6rem; }
             #gif-personal { width: 150px; height: 150px; }
-            #pregunta { font-size: 1.2rem; }
+            #pregunta-texto { font-size: 1.2rem; }
             #botones { gap: 2rem; }
             .btn { padding: 0.8rem 1.5rem; font-size: 1rem; }
-            #corazon-final { font-size: 5rem; }
-            #texto-amor { font-size: 1rem; }
+            #corazon-final { font-size: 8rem; }
+            #texto-amor { font-size: 1rem; padding: 2rem 1rem; }
         }
     </style>
 </head>
 <body>
     <div id="corazon-inicial">💖</div>
 
-    <div id="pregunta">
+    <div id="contenedor-pregunta">
         <div id="gif-personal"></div>
-        <div>¿Quieres ser mi San Valentín?</div>
+        <div id="pregunta-texto">¿Quieres ser mi San Valentín?</div>
         <div id="botones">
             <button id="btn-no" class="btn">No</button>
             <button id="btn-si" class="btn">Sí</button>
@@ -138,16 +157,18 @@
     </div>
 
     <div id="escena-final">
-        <div id="corazon-final">💖</div>
-        <div id="texto-amor">
-            Te amo mucho Shinae Sheylyn Casas Villalba. Espero que nos podamos ver el domingo mi amor. Tengo una sorpresa para ti mi vida 😍. Se que tal vez hoy 14 no podremos vernos pero el domingo si. 
-            No te quiero perder mi amor, quiero mejorar por nosotros te amooooo mucho ❤️.
+        <div id="contenedor-corazon-final">
+            <div id="corazon-final">💖</div>
+            <div id="texto-amor">
+                Te amo mucho Shinae Sheylyn Casas Villalba. Espero que nos podamos ver el domingo mi amor. Tengo una sorpresa para ti mi vida 😍. Se que tal vez hoy 14 no podremos vernos pero el domingo si. 
+                No te quiero perder mi amor, quiero mejorar por nosotros te amooooo mucho ❤️.
+            </div>
         </div>
     </div>
 
     <script>
         const corazonInicial = document.getElementById('corazon-inicial');
-        const pregunta = document.getElementById('pregunta');
+        const contenedorPregunta = document.getElementById('contenedor-pregunta');
         const botones = document.getElementById('botones');
         const btnNo = document.getElementById('btn-no');
         const btnSi = document.getElementById('btn-si');
@@ -164,8 +185,7 @@
         corazonInicial.addEventListener('click', () => {
             corazonInicial.style.opacity = '0';
             setTimeout(() => {
-                pregunta.style.display = 'block';
-                botones.style.display = 'flex';
+                contenedorPregunta.style.display = 'flex';
             }, 500);
         });
 
@@ -182,7 +202,7 @@
         });
 
         btnSi.addEventListener('click', () => {
-            pregunta.style.opacity = '0';
+            contenedorPregunta.style.opacity = '0';
             setTimeout(() => {
                 escenaFinal.style.display = 'flex';
             }, 500);
