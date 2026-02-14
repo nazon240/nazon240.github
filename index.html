@@ -1,5 +1,4 @@
-
-             <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -56,7 +55,7 @@
             width: 200px;
             height: 200px;
             border-radius: 50%;
-            background: url('https://media.giphy.com/media/Ju7l5y9osyymQ/giphy.gif') center/cover; /* Reemplaza con tu GIF */
+            background: url('https://media.giphy.com/media/Ju7l5y9osyymQ/giphy.gif') center/cover;
         }
         #botones {
             display: flex;
@@ -64,6 +63,7 @@
             align-items: center;
             gap: 4rem;
             flex-wrap: wrap;
+            position: relative;
         }
         .btn {
             padding: 1rem 2rem;
@@ -71,8 +71,7 @@
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            position: relative;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         #btn-no {
             background: #95a5a6;
@@ -83,8 +82,9 @@
             color: #8e44ad;
             font-weight: bold;
         }
-        #btn-no:active {
-            transform: scale(0.8) translateX(20px) rotate(10deg);
+        #btn-no.pequeño {
+            transform: scale(0.7);
+            transition: all 0.3s ease;
         }
         #escena-final {
             display: none;
@@ -105,7 +105,7 @@
             align-items: center;
         }
         #corazon-final {
-            font-size: 12rem; /* Más grande */
+            font-size: 12rem;
             color: #e74c3c;
             position: absolute;
             animation: latido 1.5s infinite;
@@ -169,7 +169,6 @@
     <script>
         const corazonInicial = document.getElementById('corazon-inicial');
         const contenedorPregunta = document.getElementById('contenedor-pregunta');
-        const botones = document.getElementById('botones');
         const btnNo = document.getElementById('btn-no');
         const btnSi = document.getElementById('btn-si');
         const escenaFinal = document.getElementById('escena-final');
@@ -191,11 +190,18 @@
 
         btnNo.addEventListener('click', () => {
             noPresionado++;
-            btnNo.style.transform = 'scale(0.7)';
+            
+            // Se hace pequeño inmediatamente
+            btnNo.classList.add('pequeño');
+            
             if (noPresionado < posicionesNo.length) {
                 const pos = posicionesNo[noPresionado];
-                Object.assign(btnNo.style, { position: 'absolute', ...pos });
-                setTimeout(() => { btnNo.style.transform = ''; }, 300);
+                // Mueve manteniendo el tamaño pequeño
+                Object.assign(btnNo.style, { 
+                    position: 'absolute', 
+                    zIndex: '1000',
+                    ...pos 
+                });
             } else {
                 btnNo.style.display = 'none';
             }
