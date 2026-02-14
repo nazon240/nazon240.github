@@ -1,29 +1,192 @@
 <!DOCTYPE html>
-<script languaje="password">
-
-  var getin = prompt("contraseña.....pista... tiene que ver con tu nuevo DNI... recuerdas lo que me contaste.")
-
-  if (getin!="070622")
-
-  {location.href='https://nazon240.github.io/nazon240.github/'}
-
-  else
-
-  {alert('Contraseña correcta, acepta para ver la entrada')}
-
-</script>
-<html>
+<html lang="es">
 <head>
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
-  <link rel="stylesheet" href="styles/style.css"/>
-  <title> .-.</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi San Valentín</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        #corazon-inicial {
+            font-size: 10rem;
+            color: #e74c3c;
+            cursor: pointer;
+            text-shadow: 0 0 20px #ff1744, 0 0 40px #ff1744;
+            animation: brillo 2s infinite alternate, float 3s infinite ease-in-out;
+            transition: opacity 0.5s;
+        }
+        @keyframes brillo {
+            0% { text-shadow: 0 0 20px #ff1744, 0 0 40px #ff1744; }
+            100% { text-shadow: 0 0 30px #ff69b4, 0 0 60px #ff69b4; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        #pregunta {
+            display: none;
+            text-align: center;
+            color: black;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        #gif-personal {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            background: url('https://media.giphy.com/media/Ju7l5y9osyymQ/giphy.gif') center/cover; /* Reemplaza con tu GIF */
+        }
+        #botones {
+            display: none;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        #btn-no {
+            background: #95a5a6;
+            color: black;
+            position: relative;
+        }
+        #btn-si {
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            color: #8e44ad;
+            font-weight: bold;
+        }
+        #btn-no:active {
+            transform: scale(0.8) translateX(20px) rotate(10deg);
+        }
+        #escena-final {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+        #corazon-final {
+            font-size: 8rem;
+            color: #e74c3c;
+            position: relative;
+            animation: latido 1.5s infinite;
+        }
+        @keyframes latido {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        #texto-amor {
+            position: absolute;
+            max-width: 90%;
+            text-align: center;
+            color: #333;
+            font-size: 1.2rem;
+            line-height: 1.5;
+            animation: fadeInUp 1s ease-out;
+            padding: 2rem;
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 768px) {
+            #corazon-inicial { font-size: 6rem; }
+            #gif-personal { width: 150px; height: 150px; }
+            #pregunta { font-size: 1.2rem; }
+            #botones { gap: 2rem; }
+            .btn { padding: 0.8rem 1.5rem; font-size: 1rem; }
+            #corazon-final { font-size: 5rem; }
+            #texto-amor { font-size: 1rem; }
+        }
+    </style>
 </head>
 <body>
-  <h1>
-    4:58 pm lunes 21 abril.
-  </h1>
-<h1>
- Shinae recuerda bañarte ✨ JAJAJJA 
-</h1>
+    <div id="corazon-inicial">💖</div>
+
+    <div id="pregunta">
+        <div id="gif-personal"></div>
+        <div>¿Quieres ser mi San Valentín?</div>
+        <div id="botones">
+            <button id="btn-no" class="btn">No</button>
+            <button id="btn-si" class="btn">Sí</button>
+        </div>
+    </div>
+
+    <div id="escena-final">
+        <div id="corazon-final">💖</div>
+        <div id="texto-amor">
+            Te amo mucho Shinae Sheylyn Casas Villalba. Espero que nos podamos ver el domingo mi amor. Tengo una sorpresa para ti mi vida 😍. Se que tal vez hoy 14 no podremos vernos pero el domingo si. 
+            No te quiero perder mi amor, quiero mejorar por nosotros te amooooo mucho ❤️.
+        </div>
+    </div>
+
+    <script>
+        const corazonInicial = document.getElementById('corazon-inicial');
+        const pregunta = document.getElementById('pregunta');
+        const botones = document.getElementById('botones');
+        const btnNo = document.getElementById('btn-no');
+        const btnSi = document.getElementById('btn-si');
+        const escenaFinal = document.getElementById('escena-final');
+
+        let noPresionado = 0;
+        const posicionesNo = [
+            { top: '20%', left: '10%' },
+            { top: '10%', right: '10%' },
+            { bottom: '20%', left: '20%' },
+            { top: '30%', right: '20%' }
+        ];
+
+        corazonInicial.addEventListener('click', () => {
+            corazonInicial.style.opacity = '0';
+            setTimeout(() => {
+                pregunta.style.display = 'block';
+                botones.style.display = 'flex';
+            }, 500);
+        });
+
+        btnNo.addEventListener('click', () => {
+            noPresionado++;
+            btnNo.style.transform = 'scale(0.7)';
+            if (noPresionado < posicionesNo.length) {
+                const pos = posicionesNo[noPresionado];
+                Object.assign(btnNo.style, { position: 'absolute', ...pos });
+                setTimeout(() => { btnNo.style.transform = ''; }, 300);
+            } else {
+                btnNo.style.display = 'none';
+            }
+        });
+
+        btnSi.addEventListener('click', () => {
+            pregunta.style.opacity = '0';
+            setTimeout(() => {
+                escenaFinal.style.display = 'flex';
+            }, 500);
+        });
+    </script>
 </body>
 </html>
